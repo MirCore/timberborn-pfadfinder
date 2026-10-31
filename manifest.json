@@ -3,7 +3,7 @@
   "Version": "0.7.1",
   "Id": "Mirco.Pfadfinder",
   "MinimumGameVersion": "1.1.1.0",
-  "Description": "Drag a path or tubeway from one tile to another and it routes around trees, buildings and other obstacles instead of drawing a straight L. Reuses existing paths and tubes. Hold Alt while dragging for the vanilla L-shape (can be swapped in the mod settings).",
+  "Description": "Drag a path or tubeway and it routes around trees, buildings and other obstacles to where you pointed instead of drawing the vanilla straight L, through existing stairs if the end is on another level. Reuses existing paths, bridges and tubes. Hold Alt for the vanilla L (swappable in the mod settings). Requires Harmony and Mod Settings.",
   "RequiredMods": [
     { "Id": "Harmony" },
     { "Id": "eMka.ModSettings" }

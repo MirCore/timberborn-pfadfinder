@@ -51,6 +51,8 @@
     <MakeDir Directories="$(ModOutputDir)" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModOutputDir)" />
     <Copy SourceFiles="manifest.json" DestinationFolder="$(ModOutputDir)" />
+    <!-- The game's Workshop uploader takes thumbnail.png/.jpg/.jpeg from the mod folder. -->
+    <Copy SourceFiles="thumbnail.jpg" DestinationFolder="$(ModOutputDir)" />
     <Message Importance="high" Text="Pfadfinder deployed to $(ModOutputDir)" />
   </Target>
 
