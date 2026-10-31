@@ -1,13 +1,12 @@
-# Pfadfinder (smart path tool) — a Timberborn mod
+# Pfadfinder (smart path tool) Timberborn mod
+
+![Pfadfinder routing a path and a tubeway around obstacles](thumbnail.jpg)
 
 Drag a path from one tile to another and it routes around trees, buildings, rubble, cliffs and
 anything else you can't build on, instead of drawing the vanilla straight L.
 
-> **Disclaimer: this mod is vibe coded.** It was written largely by an AI coding assistant (Claude),
-> working from decompiled game code and in-game feedback, not hand-written and reviewed. It's
-> play-tested but not exhaustively: expect rough edges and back up saves you care about. The vanilla
-> tool is always one key away (**Alt**, unless swapped in the settings). Bug reports with
-> `[Pfadfinder]` lines from `Player.log` are welcome.
+> **Disclaimer: this mod is AI coded.** It was written largely by an AI coding assistant (Claude), not hand-written and reviewed.
+> It's play-tested and code reviewed but not exhaustively.
 
 - Works with the Path, Tubeway and Vertical Tubeway tools, in game and map editor. No new buttons.
 - A clear vanilla L stays the vanilla L. Routes prefer few turns.
