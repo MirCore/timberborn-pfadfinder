@@ -53,6 +53,9 @@
     <Copy SourceFiles="manifest.json" DestinationFolder="$(ModOutputDir)" />
     <!-- The game's Workshop uploader takes thumbnail.png/.jpg/.jpeg from the mod folder. -->
     <Copy SourceFiles="thumbnail.jpg" DestinationFolder="$(ModOutputDir)" />
+    <!-- Links uploads to Workshop item 3831217281; without it the uploader creates a new item.
+         UpdateDescription/UpdateVisibility are off so uploads keep the Steam page's text and visibility. -->
+    <Copy SourceFiles="workshop_data.json" DestinationFolder="$(ModOutputDir)" />
     <Message Importance="high" Text="Pfadfinder deployed to $(ModOutputDir)" />
   </Target>
 

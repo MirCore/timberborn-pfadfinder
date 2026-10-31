@@ -2,8 +2,8 @@
 
 ![Pfadfinder routing a path and a tubeway around obstacles](thumbnail.jpg)
 
-Drag a path from one tile to another and it routes around trees, buildings, rubble, cliffs and
-anything else you can't build on, instead of drawing the vanilla straight L.
+A path dragged from one tile to another is routed around trees, buildings, rubble, cliffs and
+anything else that can't be built on, instead of the vanilla straight L.
 
 > **Disclaimer: this mod is AI coded.** It was written largely by an AI coding assistant (Claude), not hand-written and reviewed.
 > It's play-tested and code reviewed but not exhaustively.
@@ -12,19 +12,19 @@ anything else you can't build on, instead of drawing the vanilla straight L.
 - A clear vanilla L stays the vanilla L. Routes prefer few turns.
 - Existing paths (tubes, for tubeways), bridges, gates and airlocks are reused, in the directions
   they can actually be walked.
-- Drag to another height level and the route uses existing stairs (or vertical tubeways). No new
-  stairs are built.
+- A drag that ends on another height level is routed through existing stairs (or vertical
+  tubeways). No new stairs are built.
 - Goes under platforms and overhangs, over stumps and dead bushes.
-- No route found: you see the vanilla L. Routes stop at the tool's 40-tile preview limit, like vanilla.
+- If no route exists, the vanilla L is shown. Routes stop at the tool's 40-tile preview limit, like vanilla.
 
 ## Settings
 
 Needs the **Mod Settings** mod (`eMka.ModSettings`):
 
-- **Hold Alt to route** (off): swap Alt's role — drags are vanilla, Alt routes.
-- **Route across levels** (on): use the height level the cursor points at, via existing stairs.
-- **Route tubeways** (on): route the tubeway tools too.
-- **Hide build range while routing** (off): skip the district range overlay for routed drags.
+- **Hold Alt to route** (off): swaps Alt's role — drags are vanilla, Alt routes.
+- **Route across levels** (on): uses the height level the cursor points at, via existing stairs.
+- **Route tubeways** (on): routes the tubeway tools too.
+- **Hide build range while routing** (off): skips the district range overlay for routed drags.
 
 ## How it works
 
@@ -53,7 +53,8 @@ Search tuning (`Margin`, costs, budget) is at the top of `GridRouter.cs`.
 
 Needs Timberborn 1.1+, the **Harmony** and **Mod Settings** workshop mods (subscribed, so their DLLs
 are on disk) and the .NET SDK 6+. The build deploys `Pfadfinder.dll` and `manifest.json` to
-`Documents/Timberborn/Mods/Pfadfinder/`; then enable the mod (with Harmony and Mod Settings).
+`Documents/Timberborn/Mods/Pfadfinder/`, where it is enabled in the mod manager together with
+Harmony and Mod Settings.
 
 ```bash
 dotnet build -c Release                                          # default Steam location (Windows)
@@ -71,7 +72,18 @@ dotnet build -c Release \
   -p:ModOutputDir="$STEAM/compatdata/1062090/pfx/drive_c/users/steamuser/Documents/Timberborn/Mods/Pfadfinder"
 ```
 
-macOS: pass `ManagedDir` as `Timberborn.app/Contents/Resources/Data/Managed`.
+macOS: `ManagedDir` is `Timberborn.app/Contents/Resources/Data/Managed`.
+
+## Publishing updates
+
+The mod is [Workshop item 3831217281](https://steamcommunity.com/sharedfiles/filedetails/?id=3831217281).
+The build copies `workshop_data.json` into the mod folder: it links uploads to that item (without it
+the game's uploader creates a new one) and keeps the Steam page's description and visibility.
+The page text lives in `workshop_description.bbcode` and is pasted into Steam by hand when it changes.
+
+1. The version is raised in `manifest.json` and `Pfadfinder.csproj`, and the project built.
+2. A subscribed Workshop copy is unsubscribed first, so the game doesn't load the mod twice.
+3. Upload: main menu → Mods → upload → Pfadfinder → Upload to Steam Workshop.
 
 ## Troubleshooting
 
@@ -81,7 +93,7 @@ Linux/Proton: `$STEAM/compatdata/1062090/pfx/drive_c/users/steamuser/AppData/Loc
 - *"Failed to apply patches"* — a game update changed the patched code; the mod is inactive and the
   vanilla tools work as before.
 - *"Routing failed, falling back…"* — logged once; that drag uses vanilla.
-- Compile errors after a game update usually name a type that moved; fix the `using` line.
+- Compile errors after a game update usually name a type that moved; the fix is usually a `using` line.
 
 ## Ideas for later
 
