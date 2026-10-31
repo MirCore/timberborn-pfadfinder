@@ -1,0 +1,11 @@
+{
+  "Name": "Pfadfinder (smart path tool)",
+  "Version": "0.7.1",
+  "Id": "Mirco.Pfadfinder",
+  "MinimumGameVersion": "1.1.1.0",
+  "Description": "Drag a path or tubeway from one tile to another and it routes around trees, buildings and other obstacles instead of drawing a straight L. Reuses existing paths and tubes. Hold Alt while dragging for the vanilla L-shape (can be swapped in the mod settings).",
+  "RequiredMods": [
+    { "Id": "Harmony" },
+    { "Id": "eMka.ModSettings" }
+  ]
+}

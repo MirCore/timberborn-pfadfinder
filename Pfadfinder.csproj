@@ -1,0 +1,57 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>Pfadfinder</AssemblyName>
+    <RootNamespace>Pfadfinder</RootNamespace>
+    <Version>0.7.1</Version>
+    <Nullable>disable</Nullable>
+    <!-- Needed by the publicizer so private game members can be used without access errors. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <!--
+    Adjust these to your machine, or pass them on the command line:
+      dotnet build -c Release -p:TimberbornDir="D:\SteamLibrary\steamapps\common\Timberborn"
+    macOS: set ManagedDir to  <Timberborn.app>/Contents/Resources/Data/Managed
+  -->
+  <PropertyGroup>
+    <SteamDir Condition="'$(SteamDir)' == ''">C:\Program Files (x86)\Steam\steamapps</SteamDir>
+    <TimberbornDir Condition="'$(TimberbornDir)' == ''">$(SteamDir)\common\Timberborn</TimberbornDir>
+    <ManagedDir Condition="'$(ManagedDir)' == ''">$(TimberbornDir)\Timberborn_Data\Managed</ManagedDir>
+    <!-- The "Harmony" mod from the Steam Workshop (item 3284904751) ships 0Harmony.dll. -->
+    <HarmonyDll Condition="'$(HarmonyDll)' == ''">$(SteamDir)\workshop\content\1062090\3284904751\0Harmony.dll</HarmonyDll>
+    <!-- The "Mod Settings" mod from the Steam Workshop (item 3283831040, Id eMka.ModSettings). -->
+    <ModSettingsDir Condition="'$(ModSettingsDir)' == ''">$(SteamDir)\workshop\content\1062090\3283831040\version-1.1\Scripts</ModSettingsDir>
+    <UserHome Condition="'$(UserHome)' == '' and '$(USERPROFILE)' != ''">$(USERPROFILE)</UserHome>
+    <UserHome Condition="'$(UserHome)' == ''">$(HOME)</UserHome>
+    <ModOutputDir Condition="'$(ModOutputDir)' == ''">$(UserHome)\Documents\Timberborn\Mods\Pfadfinder</ModOutputDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.2" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="$(ManagedDir)\Timberborn.*.dll" Publicize="true" Private="false" />
+    <Reference Include="$(ManagedDir)\Bindito.*.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\UnityEngine.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\Unity.InputSystem.dll" Private="false" />
+    <Reference Include="$(ManagedDir)\System.Collections.Immutable.dll" Private="false" Condition="Exists('$(ManagedDir)\System.Collections.Immutable.dll')" />
+    <Reference Include="$(HarmonyDll)" Private="false" />
+    <Reference Include="$(ModSettingsDir)\ModSettings.Core.dll" Private="false" />
+  </ItemGroup>
+
+  <!-- After building, lay the mod out in Documents/Timberborn/Mods/Pfadfinder -->
+  <Target Name="DeployMod" AfterTargets="Build">
+    <MakeDir Directories="$(ModOutputDir)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ModOutputDir)" />
+    <Copy SourceFiles="manifest.json" DestinationFolder="$(ModOutputDir)" />
+    <Message Importance="high" Text="Pfadfinder deployed to $(ModOutputDir)" />
+  </Target>
+
+</Project>
