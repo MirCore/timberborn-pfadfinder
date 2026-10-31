@@ -5,7 +5,7 @@
     <LangVersion>9.0</LangVersion>
     <AssemblyName>Pfadfinder</AssemblyName>
     <RootNamespace>Pfadfinder</RootNamespace>
-    <Version>0.7.1</Version>
+    <Version>1.0.0</Version>
     <Nullable>disable</Nullable>
     <!-- Needed by the publicizer so private game members can be used without access errors. -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
